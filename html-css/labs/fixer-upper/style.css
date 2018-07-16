@@ -18,6 +18,16 @@ body {
   margin: 0px;
 }
 
+#info {
+  text-align: center;
+  background-color: #EA2533;
+  padding-top: 2%;
+}
+
+#slogan {
+  font-family: arial;
+}
+
 #header {
   color: white;
   background-color: #4a75e6;
@@ -30,9 +40,21 @@ body {
 }
 
 #links {
+  border: 5px solid goldenrod;
   background-color: #Febc1f;
   height: 50px;
   text-align: center;
+}
+
+.faces {
+  text-align: center;
+  background-color: #08AF22;
+}
+
+.image {
+  width: 20em;
+  height: 10em;
+  border-radius: 50%;
 }
 
 .link {
@@ -42,4 +64,5 @@ body {
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 2%;
+  margin-bottom: 2%;
 }

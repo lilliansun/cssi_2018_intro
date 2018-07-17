@@ -1,0 +1,27 @@
+/*google hex colors
+blue: #4885ed
+yellow: #f4c20d;
+red: #db3236;
+green: #3cba54; */
+
+.intro {
+  background-color: #4885ed;
+}
+
+.intro h1{
+  font-family: cursive;
+}
+
+.basicinfo {
+  list-style-type: none;
+}
+
+.navigation {
+  background-color: #f4c20d;
+  display: grid;
+  grid-template-columns: 3fr 3fr;
+  grid-template-rows: 1fr;
+  justify-content: space-around;
+
+
+}

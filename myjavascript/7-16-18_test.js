@@ -13,12 +13,6 @@ console.log('You are ${age+1} years old');
 comment */
 /** documentation comment */
 
-if (/**boolean expression*/) {
-  // Execute if exrpession is true
-} else {
-  // Execute if expression is false
-}
-
 
 if (age >= 18) {
   console.log('You can get your driver\'s license and vote');
@@ -27,3 +21,25 @@ if (age >= 18) {
 } else {
   console.log('Sorry, you can\'t vote or get your license')
 }
+
+function makeGreetingMessage(name1, name2=null) {
+  if (name2 == null)
+    return `Hello ${name1}`;
+  else {
+  //code
+    return `Hello ${name1} and ${name2}`;
+  }
+}
+
+
+function greet(name1, name2=null) {
+  console.log(makeGreetingMessage(name1, name2));
+}
+
+const multiplyBy3 = (x) => x*3;
+
+setInterval(() => {
+  console.log(new Date());
+}, 1000)
+
+greet("Alice");

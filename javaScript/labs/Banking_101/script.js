@@ -14,22 +14,65 @@
 
 let customer_name;
 let balance;
+let logged_in = false;
+let password;
 
-function openAccount(name){
-  balance = 0;
+function testMe(a) {
+  return a+4;
+}
+
+console.log(testMe(5))
+
+function openAccount(name, startbalance=0, pass){
+  balance = startbalance;
+  password = pass;
   // Set the value for customer_name equal to name below
+  customer_name = name;
+  return `${customer_name} has just opened a new account with a balance of $${balance}`;//write the statment you need to return here
+}
 
-  return //write the statment you need to return here
+function login(name, pass){
+  if (current_name===name && password === pass){
+    logged_in = true;
+    return `${current_name} has logged in`;
+  }
+  else {
+    logged_in = false;
+    return `Incorrect login`;
+  }
+}
+
+function logout(){
+  logged_in = false;
+  return `${current_name} has logged out`;
 }
 
 function deposit(value){
+  if (!logged_in){
+    return "User must log in."
+  } else{
+    balance = balance + value;
+    return `${customer_name} has deposited ${value}. ${customer_name}'s account has $${balance} now`;
+  }
+
   // update the value of balance
   //return the correct statement
 }
 
-function withdraw(/*argument here*/){
-  //update the value of balance
+function withdraw(value){
+  if (!logged_in){
+    return "User must log in.";
+  } else if((balance - value)<0){
+    return `Sorry ${customer_name}, you do not have enough money in your account. You need ${Math.abs(balance-value)} more dollars`;
+  }
+  else {
+    balance = balance - value;
+    return `${customer_name} has withdrawn $${value}. ${customer_name} now has $${balance} remaining.`;
+  }//update the value of balance
   //return the correct statement
 }
 
 // Write your script below
+console.log(openAccount("Bob", 300));
+console.log(deposit(50));
+console.log(withdraw(500));

@@ -14,18 +14,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-inside_movie = {
-    "title": "Inside Out",
-    "id": "tt2096673",
-    "year_released": 2012,
-    "rating": "PG",
-    "score": 7.5,
-    "out_of": 10,
-    "reviews": 463787
-}
+if __name__== '__main__':
+    inside_movie = {
+        "title": "Inside Out",
+        "id": "tt2096673",
+        "year_released": 2012,
+        "rating": "PG",
+        "score": 7.5,
+        "out_of": 10,
+        "reviews": 463787
+    }
 
-# Do not edit the code above!
+    # Do not edit the code above!
 
-# Write your code below to update the information in accordance with its
-# IMDB page: http://www.imdb.com/title/tt2096673/
+    # Write your code below to update the information in accordance with its
+    # IMDB page: http://www.imdb.com/title/tt2096673/
 
+    inside_movie["year_released"] = 2015;
+    inside_movie["score"] = 8.2;
+    inside_movie["reviews"] = 489496;
+
+    del inside_movie["out_of"]
+
+    inside_movie["genres"] = ["Animation", "Adventure", "Comedy"]
+
+    for key, val in inside_movie.items():
+        print("{k}: {v}".format(k = key, v = val))
+
+
+    dict = {}
+    while True:
+        key = input('Give a key or stop: ')
+        if key=="stop":
+            break;
+        val = input('Give a val: ')
+        dict[key] = val;
+
+        for ke, va in dict.items():
+            print("{k}: {v}".format(k = ke, v = va))

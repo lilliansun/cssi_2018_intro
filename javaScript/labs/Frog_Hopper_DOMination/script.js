@@ -13,13 +13,33 @@
 // limitations under the License.
 
 let currentlily = 1;
+let currentlilyId = '#lilypad' + currentlily;
+let frogger = document.querySelector('#frog');
+/*use a querySelector to grab your frog from your HTML*/;
+let lilypad = document.querySelector(currentlilyId);
 
-let frogger = /*use a querySelector to grab your frog from your HTML*/;
+frogger.addEventListener('mouseover', function() {
+  console.log("hovered");
+  frogger.style.width = "80px";
+  frogger.style.height = "80px";
+})
 
-frogger.addEventListener(/* Insert type of event are we listening for */, function(){
-// Insert what should happen when you click on the frog!
+frogger.addEventListener('mouseout', function() {
+  frogger.style.width = "70px";
+  frogger.style.height = "70px";
+})
 
 
+frogger.addEventListener('click', function(){
+  console.log("hop");
+  lilypad.classList.remove("active");
 
+  currentlily = currentlily + 1;
+  currentlilyId = "#lilypad" + currentlily;
+  lilypad = document.querySelector(currentlilyId);
+  frogger.style.left = lilypad.style.left
+  frogger.style.top = lilypad.style.top
+  lilypad.classList.add("active");
+  // Insert what should happen when you click on the frog!
 
 });

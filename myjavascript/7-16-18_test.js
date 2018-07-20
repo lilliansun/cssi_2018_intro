@@ -38,8 +38,54 @@ function greet(name1, name2=null) {
 
 const multiplyBy3 = (x) => x*3;
 
-setInterval(() => {
+/*setInterval(() => {
   console.log(new Date());
 }, 1000)
-
+*/
 greet("Alice");
+
+
+//Data Structures//
+/**empty array: []*/
+const emptyArray = [];
+const nonEmptyArray = [1, 2, 3, 4];
+
+//For loops//
+for (let i = 0; i <4; i++)
+{
+  console.log(nonEmptyArray[i]);
+}
+//foreach loops//
+nonEmptyArray.forEach((name) =>{
+  console.log(`forEach: ${name}`);
+})
+
+const article  = {
+  name: 'Dog family gives birth to liter of 10 puppies.',
+  views: 1234,
+  datePublished: '03/25/2018',
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+const floatingBox = document.querySelector('.floatingBox');
+let boxTop = 100;
+let boxLeft = 100;
+document.addEventListener('keydown', (event) => {
+  const key = event.key;
+  if (key==="ArrowDown"){
+    boxTop+=5
+  } else if(key === "ArrowUp"){
+    boxTop-=5;
+  } else if (key==="ArrowLeft"){
+    boxLeft-=5;
+  } else if (key==="ArrowRight"){
+    boxLeft+=5;
+  } else {
+    return;
+  }
+  floatingBox.style.top = boxTop + 'px';
+  floatingBox.style.left = boxLeft + 'px';
+  console.log(event);
+});
+
+});

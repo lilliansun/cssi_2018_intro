@@ -13,3 +13,48 @@
 // limitations under the License.
 
 console.log(dataObject);
+console.log(dataObject.data["0"].images.original.url);
+
+let create = document.querySelector('#create');
+let del = document.querySelector('#delete');
+let body = document.querySelector('body');
+let random = document.querySelector('#random');
+
+create.addEventListener('click', ()=>{
+  dataObject.data.forEach(function (object) {
+
+    url = object.images.original.url;
+    img = document.createElement('img');
+    title = object.title;
+    text = document.createElement('h6');
+
+    img.src = url;
+    img.style.height = "200px";
+    img.style.width = "200px";
+    img.classList.add('gif');
+
+    text.innerText = title;
+    text.classList.add('gif');
+
+    body.append(text);
+    body.append(img);
+
+
+
+  })
+
+})
+
+del.addEventListener('click', ()=>{
+  gif = document.querySelector('.gif');
+  while(gif!=null){
+    body.removeChild(gif)
+    gif = document.querySelector('.gif');
+  }
+})
+
+random.addEventListener('click', ()=> {
+  index = Math.floor(Math.random()*10);
+  newUrl = dataObject.data[index].images.original.url;
+  
+})

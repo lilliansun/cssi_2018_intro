@@ -1,10 +1,10 @@
-# Copyright 2018 Google LLC
+# Copyright 2016 Google Inc. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,25 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-application: fortune-teller
-version: 1
-runtime: python27
-api_version: 1
-threadsafe: yes
+import webtest
 
-handlers:
-- url: /favicon\.ico
-  static_files: favicon.ico
-  upload: favicon\.ico
+import main
 
-#static directories should go ABOVE the catch all url (.*)
-- url: .*
-  script: main.app
 
-libraries:
-- name: webapp2
-  version: "2.5.2"
+def test_get():
+    app = webtest.TestApp(main.app)
 
-- name: jinja2
-  version: latest
-#add jinja2 here, remember in .yaml files, every white space is important
+    response = app.get('/')
+
+    assert response.status_int == 200
+    assert response.body == 'Hello, World!'

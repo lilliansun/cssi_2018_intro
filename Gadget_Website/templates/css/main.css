@@ -1,0 +1,47 @@
+
+.logo {
+  height: 5%;
+  width: 5%;
+}
+
+#navPanel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: right;
+}
+
+.heading {
+  display: flex;
+  flex-wrap: warp;
+}
+
+#title {
+  display: flex;
+  align-items: left;
+}
+.navigation {
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-style: arial;
+  font-size: 50px;
+
+}
+
+.image {
+  height: 100%%;
+  width: 100%%;
+
+}
+
+.main {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+}
+
+.slideshow {
+  width: 200%;
+  margin 10px;
+}

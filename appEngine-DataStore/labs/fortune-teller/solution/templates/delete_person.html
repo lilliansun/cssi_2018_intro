@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+
+    <h1>You deleted {{ fname }} {{lname}}!</h1>
+
+
+    <h5> Here's a list of the people we have now </h5>
+
+    {% for person in persons %}
+      Name: {{ person.fname }} {{person.lname}} <br>
+      Occupation: {{ person.occupation }} <br>
+      Age: {{ person.age }} <br>
+      <form method=POST action="/delete_person">
+        <input type="submit" value = "Delete">
+        <input type="hidden" value="{{ person.key.id() }}" name="person_key">
+        <br><br>
+      </form>
+    {% endfor %}
+
+    <form method=GET action="/new_person">
+      <input type = "submit" value="Create another person">
+    </form>
+
+  </body>
+</html>

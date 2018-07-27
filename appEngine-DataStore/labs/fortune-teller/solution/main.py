@@ -34,7 +34,7 @@ import webapp2
 import os
 import jinja2
 import random
-
+from movie import Movie, Person
 
 def get_fortune():
     fortune_list=['Tomorrow, you will meet a life-changing new friend.',
@@ -67,8 +67,59 @@ class FortuneHandler(webapp2.RequestHandler):
         #astro_sign = request.form.get('user_astrological_sign')
         self.response.write(end_template.render(my_dict))
 
+class DataDemoHandler(webapp2.RequestHandler):
+    def get(self):
+        start_template = jinja_current_directory.get_template("templates/create_movie.html")
+        self.response.write(start_template.render())
 
+    def post(self):
+        title = self.request.get('movie_title')
+        runtime_mins = int(self.request.get('movie_runtime'))
+        rating = float(self.request.get('movie_rating'))
+
+        my_movie = Movie(title = title, runtime_mins = runtime_mins, rating = rating)
+        my_movie.put()
+
+
+class PersonHandler(webapp2.RequestHandler):
+    def get(self):
+        start_template = jinja_current_directory.get_template("templates/create_person.html")
+        self.response.write(start_template.render())
+
+    def post(self):
+        first_name = self.request.get("person_fname")
+        last_name = self.request.get("person_lname")
+        occupation = self.request.get("person_occ")
+        age = int(self.request.get("person_age"))
+
+        new_person = Person(fname = first_name, lname = last_name, occupation = occupation, age = age)
+        new_person.put()
+
+        end_template = jinja_current_directory.get_template("templates/create_person.html")
+        results = Person.query().order(Person.fname).fetch()
+
+        self.response.write(end_template.render({'persons':results}))
+
+
+class DeletePerson(webapp2.RequestHandler):
+        def post(self):
+            delete_template = jinja_current_directory.get_template("templates/delete_person.html")
+
+            person_key = int(self.request.get("person_key"))
+            person_to_delete = Person.get_by_id(person_key)
+            person_to_delete.key.delete()
+
+            results = Person.query().order(Person.fname).fetch()
+
+            self.response.write(delete_template.render({
+                'fname': person_to_delete.fname,
+                'lname': person_to_delete.lname,
+                'persons': results,
+                }))
 
 app = webapp2.WSGIApplication([
-    ('/', FortuneHandler)
+    ('/', FortuneHandler),
+    ('/enterdata', DataDemoHandler),
+    ('/new_person', PersonHandler),
+    ('/delete_person', DeletePerson)
 ], debug=True)

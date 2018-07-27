@@ -17,7 +17,7 @@ Open up the interactive console.
 Delete any existing code and add the following:
 ```
 #in interactive console
-from google.appengine.ext import ndb
+from googlehS.appengine.ext import ndb
 import hogwarts_models
 
 print hogwarts_models.Student.query().fetch()

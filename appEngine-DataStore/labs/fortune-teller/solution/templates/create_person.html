@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+
+    <h1>Person Creator</h2>
+
+    <form method=POST>
+      Enter person's first name: <input type="text" name="person_fname"><br>
+      Enter person's last name: <input type="text" name="person_lname"><br>
+      Enter person's occupation: <input type="text" name="person_occ" value = "Unemployed"><br>
+      Enter person's age: <input type="text" name="person_age"><br>
+      <input type="submit" value = "Create Person!">
+      <br><br>
+    </form>
+
+    <form method=POST action="/delete_person">
+      {% for person in persons %}
+        Name: {{ person.fname }} {{person.lname}} <br>
+        Occupation: {{ person.occupation }} <br>
+        Age: {{ person.age }} <br>
+          <input type="submit" value = "Delete">
+          <input type="hidden" value="{{ person.key.id() }}" name="person_key">
+          <br><br>
+      {% endfor %}
+    </form>
+
+  </body>
+</html>

@@ -33,35 +33,69 @@
 import webapp2
 import os
 import random
+import jinja2
 
 
-def get_fortune():
+
+def get_fortune(astro_sign):
     #add a list of fortunes to the empty fortune_list array
-    fortune_list=['fortune1', 'fortune2']
-    #use the random library to return a random element from the array
-    random_fortune =
-    return(random_fortune)
+    fortunes={
+        'Aquarius': "You will have one kid",
+        'Pisces': 'You will own two fish',
+        'Aires': 'Don\'t spend too much money',
+        'Taurus': 'Animals are your friends',
+        'Gemini': 'You have a secret twin',
+        'Cancer': 'You will have good vibes tomorrow',
+        'Leo': 'Don\'t order pizza for five weeks',
+        'Virgo': 'Your favorite color will change',
+        'Libra': 'You will find happiness',
+        'Scorpio': 'You will die from drowning',
+        'Sagittarius': 'In two years ,you will get a 100 on a test',
+        'Capricorn': 'You will buy two apples tomorrow'
+        }
+
+    your_fortune = fortunes[astro_sign]
+    return(your_fortune)
 
 
 #remember, you can get this by searching for jinja2 google app engine
-jinja_current_directory = "insert jinja2 environment variable here"
+jinja_current_directory = jinja2.Environment(
+    loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions = ['jinja2.ext.autoescape'],
+    autoescape = 'true'
+)
 
 class FortuneHandler(webapp2.RequestHandler):
     def get(self):
         # In part 2, instead of returning this string,
         # make a function call that returns a random fortune.
-        self.response.write('a response from the FortuneHandler')
-    #add a post method
-    #def post(self):
+        start_template = jinja_current_directory.get_template(
+            "templates/fortune-start.html")
+        self.response.write(start_template.render())
+
+    def post(self):
+        self.response.write("My post handler")
+        end_template = jinja_current_directory.get_template("templates/fortune-result.html")
+        user_astro_sign = self.request.get('star-sign')
+        fortune = get_fortune(user_astro_sign)
+        self.response.write(end_template.render(
+                    {"fortune": fortune}))
 
 class HelloHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Hello World. Welcome to the root route of my app')
+
+class GoodbyeHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write('My response is goodbye world.')
 
 #the route mapping
 app = webapp2.WSGIApplication([
     #this line routes the main url ('/')  - also know as
     #the root route - to the Fortune Handler
     ('/', HelloHandler),
-    ('/predict', FortuneHandler) #maps '/predict' to the FortuneHandler
+    ('/predict', FortuneHandler),
+    ('/farewell', GoodbyeHandler)
+     #maps '/predict' to the FortuneHandler
+
 ], debug=True)
